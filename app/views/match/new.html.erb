@@ -1,0 +1,20 @@
+<h1 class='text-light'>Dodaj nowy mecz</h1>
+
+<%= form_with url: match_path do |form| %>
+  <div class='text-light'>
+    <%= form.label :Nazwa_gospodarza %><br>
+    <%= form.text_field :first_team_name %>
+  </div>
+
+  <div class='text-light'>
+    <%= form.label :Nazwa_gości %><br>
+    <%= form.text_field :second_team_name %>
+  </div>
+
+  <div class="my-2">
+    <%= form.submit "zapisz" %>
+  </div>
+<% end %>
+
+<%= link_to "Wróć", root_path %>
+
