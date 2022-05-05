@@ -1,6 +1,6 @@
 <h1 class='text-light'>Dodaj nowy mecz</h1>
 
-<%= form_with url: match_path do |form| %>
+<%= form_with model: @match do |form| %>
   <div class='text-light'>
     <%= form.label :Nazwa_gospodarza %><br>
     <%= form.text_field :first_team_name %>

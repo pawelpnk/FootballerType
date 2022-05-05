@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_02_163536) do
+ActiveRecord::Schema.define(version: 2022_05_05_180124) do
 
   create_table "matches", force: :cascade do |t|
     t.string "first_team_name"
@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 2022_05_02_163536) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.string "string"
+    t.integer "role"
+    t.integer "rate"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -1,0 +1,38 @@
+<h1 class='text-light'>Edytuj aktualny mecz</h1>
+
+<%= form_with model: @Match, method: :patch do |form| %>
+
+  <div class='text-light'>
+    <%= form.label @match.first_team_name %><br>
+  </div>
+
+  <div class='text-light'>
+    <%= form.label @match.second_team_name %><br>
+  </div>
+
+  <div class='text-light'>
+    <%= form.label :first_team_result %><br>
+    <%= form.text_field :first_team_result %>
+  </div>
+
+  <div class='text-light'>
+    <%= form.label :second_team_result %><br>
+    <%= form.text_field :second_team_result %>
+  </div>
+
+  <div class='text-light'>
+    <%= form.label :minutes %><br>
+    <%= form.text_field :minutes %>
+  </div>
+
+  <div class='text-light'>
+    <%= form.label :player %><br>
+    <%= form.text_field :player %>
+  </div>
+
+  <div class="my-2">
+    <%= form.submit "Aktualizuj" %>
+  </div>
+<% end %>
+
+<%= link_to "Wróć", root_path %>

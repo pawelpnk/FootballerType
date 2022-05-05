@@ -1,4 +1,4 @@
-class MatchController < ApplicationController
+class MatchesController < ApplicationController
     def home
         @match = Match.last
     end
@@ -24,6 +24,7 @@ class MatchController < ApplicationController
 
     def update
         @match = Match.find(params[:id])
+        # @match = Match.find_by id: params[:id]
     
         if @match.update(match_full_params)
           redirect_to root_path
@@ -34,12 +35,12 @@ class MatchController < ApplicationController
 
     private
     def match_params
-        params.permit(:first_team_name, :second_team_name)
+        params.require(:match).permit(:first_team_name, :second_team_name)
     end
 
     private
     def match_full_params
-        params.require(:match).permit(:first_team_name, :second_team_name, :first_team_result, :second_team_result, :minutes, :player)
+        params.permit(:first_team_name, :second_team_name, :first_team_result, :second_team_result, :minutes, :player)
     end
 
   end

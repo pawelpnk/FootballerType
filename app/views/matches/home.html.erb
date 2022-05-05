@@ -1,0 +1,49 @@
+<h1 class="text-light">Mecz dnia</h1>
+<h3 class="text-light"><%= @match.first_team_name %> - <%= @match.second_team_name %></h3> 
+
+<p class='text-muted'>Wynik: <span><%= @match.first_team_result.to_i %> : <%= @match.second_team_result.to_i %></span><span><%= @match.minutes.to_i %></span><span><%= @match.player %></span></p>
+<p class='text-light'>Wytypuj wynik oraz strzelca pierwszego gola razem z minutą i rywalizuj z innymi zbierając punkty!</p>
+
+<%= link_to "Aktualizuj mecz", edit_match_path(@match) %>
+<%= link_to "Zmień mecz", new_match_path %>
+
+<h3>Typy:</h3>
+<% @match.page.each do |m| %>
+  <p class="text-light">
+    <small>Pojedynek</small><br/>
+    <strong><%= m.first_team.to_i %> : <%= m.second_team.to_i %></strong>
+  </p>
+  <p>
+    <%= m.player %>
+  </p>
+  <p>
+    <%= m.minutes.to_i %>
+  </p>
+<% end %>
+
+<h3>Dodaj typ:</h3>
+<%= form_with model: [ @match, @match.page.build ] do |form| %>
+  <p>
+    <%= form.label :Gospodarz %><br>
+    <%= form.text_field :first_team %>
+  </p>
+  <p>
+    <%= form.label :Gość %><br>
+    <%= form.text_field :second_team %>
+  </p>
+    <p>
+    <%= form.label :Minuta %><br>
+    <%= form.text_field :minutes %>
+  </p>
+  <p>
+    <%= form.label :Gracz %><br>
+    <%= form.text_field :player %>
+  </p>
+  <p>
+    <%= form.label :Komentarz %><br>
+    <%= form.text_field :comment %>
+  </p>
+  <p>
+    <%= form.submit "dodaj typ" %>
+  </p>
+<% end %>

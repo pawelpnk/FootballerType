@@ -5,4 +5,16 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   # validates :name, presence: true, length: { minimum: 6 }
+
+  enum role: [:guest, :admin]
+  after_initialize :set_default_role, :if => :new_record?
+  after_initialize :set_default_rate, :if => :new_record?
+
+  def set_default_role
+    self.role ||= :guest
+  end
+
+  def set_default_rate
+    self.rate = 0
+  end
 end
