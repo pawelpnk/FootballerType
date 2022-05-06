@@ -18,24 +18,29 @@ class MatchesController < ApplicationController
     end
 
     def edit
-        # @match = Match.find(params[:id])
         @match = Match.find_by id: params[:id]
     end
 
     def update
-        @match = Match.find(params[:id])
-        # @match = Match.find_by id: params[:id]
-    
-        if @match.update(match_full_params)
-          redirect_to root_path
-        else
-          render :edit, status: :unprocessable_entity
-        end
+      @match = Match.find(params[:id])
+  
+      if @match.update(match_full_params)
+        redirect_to root_path
+      else
+        render :edit, status: :unprocessable_entity
       end
+    end
+
+    def blocked
+      @match = Match.last
+      @match.update(isActive: false)
+
+      redirect_to root_path
+    end
 
     private
     def match_params
-        params.require(:match).permit(:first_team_name, :second_team_name)
+        params.require(:match).permit(:first_team_name, :second_team_name, :user_id)
     end
 
     private

@@ -10,6 +10,9 @@
     <%= form.label :Nazwa_gości %><br>
     <%= form.text_field :second_team_name %>
   </div>
+  <div class='text-light'>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+  </div>
 
   <div class="my-2">
     <%= form.submit "zapisz" %>

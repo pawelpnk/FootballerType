@@ -1,49 +1,65 @@
-<h1 class="text-light">Mecz dnia</h1>
-<h3 class="text-light"><%= @match.first_team_name %> - <%= @match.second_team_name %></h3> 
+<div class="d-flex flex-column align-items-center text-light">
+  <h1>Mecz dnia</h1>
+  <h3 class="text-warning"><%= @match.first_team_name %> - <%= @match.second_team_name %></h3> 
 
-<p class='text-muted'>Wynik: <span><%= @match.first_team_result.to_i %> : <%= @match.second_team_result.to_i %></span><span><%= @match.minutes.to_i %></span><span><%= @match.player %></span></p>
-<p class='text-light'>Wytypuj wynik oraz strzelca pierwszego gola razem z minutą i rywalizuj z innymi zbierając punkty!</p>
+  <p class='text-muted'>Wynik:
+    <% if @match.first_team_result? %>
+    <span><%= @match.first_team_result.to_i %> : <%= @match.second_team_result.to_i %></span><br/>
+    <span>Minuta: <%= @match.minutes.to_i %></span>
+    <span>Gracz: <%= @match.player %></span>
+    <% end %>
+  </p>
+  <p>Wytypuj wynik oraz strzelca pierwszego gola razem z minutą i rywalizuj z innymi zbierając punkty!</p>
 
-<%= link_to "Aktualizuj mecz", edit_match_path(@match) %>
-<%= link_to "Zmień mecz", new_match_path %>
+  <% if user_signed_in? && current_user.role == 'admin' %>
+    <%= link_to "Aktualizuj mecz", edit_match_path(@match) %>
+    <%= link_to "Zmień mecz", new_match_path %>
+    <% if @match.isActive == true %>
+      <%= link_to "Zamknij typowanie", blocked_match_path(@match), method: :get, data: { confirm: "Czy na pewno chcesz zakończyć typowanie?" } %>
+    <% else %>
+      <p class="text-danger">Typowanie zakończone</p>
+    <% end %>
+  <%end %>
 
-<h3>Typy:</h3>
-<% @match.page.each do |m| %>
-  <p class="text-light">
-    <small>Pojedynek</small><br/>
-    <strong><%= m.first_team.to_i %> : <%= m.second_team.to_i %></strong>
-  </p>
-  <p>
-    <%= m.player %>
-  </p>
-  <p>
-    <%= m.minutes.to_i %>
-  </p>
-<% end %>
+  
+  <div style="">
+    <h4>Typy:</h4>
+    <% @match.page.each do |m| %>
+      <div class="card bg-dark mb-2" style="width: 18rem;">
+        <div class="card-body">
+          <small class="card-title text-muted"><%= m.first_team.to_i %> : <%= m.second_team.to_i %>, Gracz: <%= m.player %>, Minuta: <%= m.minutes.to_i %></small>
+          <p class="card-text"><%= m.comment %></p>
+          <small class="text-muted"><%= m.user.name %></small>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  
 
-<h3>Dodaj typ:</h3>
-<%= form_with model: [ @match, @match.page.build ] do |form| %>
-  <p>
-    <%= form.label :Gospodarz %><br>
-    <%= form.text_field :first_team %>
-  </p>
-  <p>
-    <%= form.label :Gość %><br>
-    <%= form.text_field :second_team %>
-  </p>
-    <p>
-    <%= form.label :Minuta %><br>
-    <%= form.text_field :minutes %>
-  </p>
-  <p>
-    <%= form.label :Gracz %><br>
-    <%= form.text_field :player %>
-  </p>
-  <p>
-    <%= form.label :Komentarz %><br>
-    <%= form.text_field :comment %>
-  </p>
-  <p>
-    <%= form.submit "dodaj typ" %>
-  </p>
-<% end %>
+  <div class="my-3">
+    <% if user_signed_in? %>
+      <h3>Dodaj typ:</h3>
+      <%= form_with model: [ @match, @match.page.build ] do |form| %>
+        <div class="d-flex flex-column flex-1" style="width:100%">
+          <div class="d-flex ">
+            <%= form.text_field :first_team, placeholder: "gospodarz", size: '10'%>
+          
+            <%= form.text_field :second_team, placeholder: 'gość', size: '10'%>
+          
+            <%= form.text_field :minutes, placeholder: 'minuta', size: '10'%>
+          </div>
+          <p>
+            <%= form.text_field :player, placeholder: 'gracz', style: 'width: 100%'%>
+          </p>
+          <p>
+            <%= form.text_field :comment, placeholder: 'komentarz', style: 'width: 100%'%>
+          </p>
+          <p>
+            <%= form.hidden_field :user_id, value: current_user.id %>
+          </p>
+          <button type="submit" class="btn btn-outline-light">Dodaj typ</button>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

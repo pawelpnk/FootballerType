@@ -4,7 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  # validates :name, presence: true, length: { minimum: 6 }
+  has_many :pages
+  has_many :matches
 
   enum role: [:guest, :admin]
   after_initialize :set_default_role, :if => :new_record?

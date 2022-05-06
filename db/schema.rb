@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_05_180124) do
+ActiveRecord::Schema.define(version: 2022_05_06_152536) do
 
   create_table "matches", force: :cascade do |t|
     t.string "first_team_name"
@@ -21,6 +21,9 @@ ActiveRecord::Schema.define(version: 2022_05_05_180124) do
     t.string "player"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.boolean "isActive", default: true
+    t.index ["user_id"], name: "index_matches_on_user_id"
   end
 
   create_table "pages", force: :cascade do |t|
@@ -32,7 +35,9 @@ ActiveRecord::Schema.define(version: 2022_05_05_180124) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "match_id"
+    t.integer "user_id"
     t.index ["match_id"], name: "index_pages_on_match_id"
+    t.index ["user_id"], name: "index_pages_on_user_id"
   end
 
   create_table "types", force: :cascade do |t|
@@ -56,5 +61,7 @@ ActiveRecord::Schema.define(version: 2022_05_05_180124) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "matches", "users"
   add_foreign_key "pages", "matches"
+  add_foreign_key "pages", "users"
 end

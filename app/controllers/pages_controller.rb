@@ -5,8 +5,10 @@ class PagesController < ApplicationController
     redirect_to root_path
   end
 
+
+
   private
     def pages_params
-      params.require(:page).permit(:first_team, :second_team, :player, :minutes, :comment)
+      params.require(:page).permit(:first_team, :second_team, :player, :minutes, :comment, :user_id)
     end
 end
