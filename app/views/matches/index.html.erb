@@ -1,0 +1,13 @@
+<div class="d-flex flex-column align-items-center">
+    <h3 class="text-light mb-3">Archiwum</h3>
+    <% @match.each do |m| %>
+        <div class="jumbotron d-flex flex-column align-items-center" style="width: 400px; height: 250px">
+            <h5 class="display-8"><%= m.first_team_name %> <%= m.first_team_result.to_i %> : <%= m.second_team_result.to_i %> <%= m.second_team_name %> </h5>
+            <p class="lead">Pierwsza bramka: <%= m.minutes.to_i %></p>
+            <p>Gracz: <%= m.player %></p>
+            <p class="lead">
+                <%= link_to "Szczegóły", match_pages_path(m), class: "text-info" %>
+            </p>
+        </div>
+    <% end %>
+</div>

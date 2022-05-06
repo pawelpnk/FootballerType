@@ -7,6 +7,10 @@ class MatchesController < ApplicationController
         @match = Match.new
     end
 
+    def index
+      @match = Match.all
+    end
+
     def create
         @match = Match.new(match_params)
     

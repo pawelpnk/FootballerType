@@ -20,46 +20,14 @@
       <p class="text-danger">Typowanie zakończone</p>
     <% end %>
   <%end %>
-
   
-  <div style="">
+  <div>
     <h4>Typy:</h4>
-    <% @match.page.each do |m| %>
-      <div class="card bg-dark mb-2" style="width: 18rem;">
-        <div class="card-body">
-          <small class="card-title text-muted"><%= m.first_team.to_i %> : <%= m.second_team.to_i %>, Gracz: <%= m.player %>, Minuta: <%= m.minutes.to_i %></small>
-          <p class="card-text"><%= m.comment %></p>
-          <small class="text-muted"><%= m.user.name %></small>
-        </div>
-      </div>
-    <% end %>
+    <%= render 'shared/types' %>
   </div>
   
 
   <div class="my-3">
-    <% if user_signed_in? %>
-      <h3>Dodaj typ:</h3>
-      <%= form_with model: [ @match, @match.page.build ] do |form| %>
-        <div class="d-flex flex-column flex-1" style="width:100%">
-          <div class="d-flex ">
-            <%= form.text_field :first_team, placeholder: "gospodarz", size: '10'%>
-          
-            <%= form.text_field :second_team, placeholder: 'gość', size: '10'%>
-          
-            <%= form.text_field :minutes, placeholder: 'minuta', size: '10'%>
-          </div>
-          <p>
-            <%= form.text_field :player, placeholder: 'gracz', style: 'width: 100%'%>
-          </p>
-          <p>
-            <%= form.text_field :comment, placeholder: 'komentarz', style: 'width: 100%'%>
-          </p>
-          <p>
-            <%= form.hidden_field :user_id, value: current_user.id %>
-          </p>
-          <button type="submit" class="btn btn-outline-light">Dodaj typ</button>
-        </div>
-      <% end %>
-    <% end %>
+    <%= render 'matches/form' %>
   </div>
 </div>

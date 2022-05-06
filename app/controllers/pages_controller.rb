@@ -5,7 +5,9 @@ class PagesController < ApplicationController
     redirect_to root_path
   end
 
-
+  def index
+    @match = Match.find(params[:match_id])
+  end
 
   private
     def pages_params

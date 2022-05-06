@@ -1,0 +1,9 @@
+<% @match.page.each do |m| %>
+    <div class="card bg-dark mb-2" style="width: 18rem;">
+    <div class="card-body">
+        <small class="card-title text-muted"><%= m.first_team.to_i %> : <%= m.second_team.to_i %>, Gracz: <%= m.player %>, Minuta: <%= m.minutes.to_i %></small>
+        <p class="card-text"><%= m.comment %></p>
+        <small class="text-muted"><%= m.user.name %></small>
+    </div>
+    </div>
+<% end %>
