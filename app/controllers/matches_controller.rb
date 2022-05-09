@@ -8,7 +8,7 @@ class MatchesController < ApplicationController
     end
 
     def index
-      @match = Match.all
+      @matches = Match.all
     end
 
     def create

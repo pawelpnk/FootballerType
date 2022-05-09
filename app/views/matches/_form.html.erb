@@ -1,4 +1,4 @@
-<% if user_signed_in? %>
+<% if user_signed_in? && !@match.page.any?{|u| u.user_id == current_user.id} %>
     <h3>Dodaj typ:</h3>
     <%= form_with model: [ @match, @match.page.build ] do |form| %>
     <div class="d-flex flex-column flex-1" style="width:100%">

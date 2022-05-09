@@ -26,8 +26,9 @@
     <%= render 'shared/types' %>
   </div>
   
-
-  <div class="my-3">
-    <%= render 'matches/form' %>
-  </div>
+  <% if @match.isActive == true %>
+    <div class="my-3">
+      <%= render 'matches/form' %>
+    </div>
+  <% end %>
 </div>
