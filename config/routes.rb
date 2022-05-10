@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
   root 'matches#home'
   devise_for :users
+  get 'users/top', to: "users#index", as: 'top'
   
   resources :matches do
     resources :pages
-    get 'blocked', on: :member
-    # , as: 'blocked' 
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+    patch 'blocked', on: :member
   end
 end

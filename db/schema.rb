@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_06_152536) do
+ActiveRecord::Schema.define(version: 2022_05_09_205221) do
 
   create_table "matches", force: :cascade do |t|
     t.string "first_team_name"
@@ -23,6 +23,10 @@ ActiveRecord::Schema.define(version: 2022_05_06_152536) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
     t.boolean "isActive", default: true
+    t.string "best_typer"
+    t.decimal "all_points", default: "0.0"
+    t.string "highest_result"
+    t.boolean "show_result", default: false
     t.index ["user_id"], name: "index_matches_on_user_id"
   end
 
@@ -36,6 +40,7 @@ ActiveRecord::Schema.define(version: 2022_05_06_152536) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "match_id"
     t.integer "user_id"
+    t.decimal "points", default: "0.0"
     t.index ["match_id"], name: "index_pages_on_match_id"
     t.index ["user_id"], name: "index_pages_on_user_id"
   end

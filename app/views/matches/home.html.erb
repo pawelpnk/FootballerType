@@ -2,31 +2,28 @@
   <h1>Mecz dnia</h1>
   <h3 class="text-warning"><%= @match.first_team_name %> - <%= @match.second_team_name %></h3> 
 
-  <p class='text-muted'>Wynik:
-    <% if @match.first_team_result? %>
-    <span><%= @match.first_team_result.to_i %> : <%= @match.second_team_result.to_i %></span><br/>
-    <span>Minuta: <%= @match.minutes.to_i %></span>
-    <span>Gracz: <%= @match.player %></span>
-    <% end %>
-  </p>
-  <p>Wytypuj wynik oraz strzelca pierwszego gola razem z minutą i rywalizuj z innymi zbierając punkty!</p>
+  <%= render 'matches/match_day' %>
 
-  <% if user_signed_in? && current_user.role == 'admin' %>
-    <%= link_to "Aktualizuj mecz", edit_match_path(@match) %>
-    <%= link_to "Zmień mecz", new_match_path %>
-    <% if @match.isActive == true %>
-      <%= link_to "Zamknij typowanie", blocked_match_path(@match), method: :get, data: { confirm: "Czy na pewno chcesz zakończyć typowanie?" } %>
-    <% else %>
-      <p class="text-danger">Typowanie zakończone</p>
-    <% end %>
-  <%end %>
+  <p>Wytypuj wynik oraz strzelca pierwszego gola razem z minutą i rywalizuj z innymi zbierając punkty!</p>
   
-  <div>
+  <% if user_signed_in? && current_user.role == 'admin' %>
+    <% if !@match.isActive %>
+      <%= link_to "Aktualizuj mecz", edit_match_path(@match) %>
+    <% end %>
+    <%= link_to "Zmień mecz", new_match_path %>
+    <% if @match.isActive %>
+      <%= link_to "Zamknij typowanie", blocked_match_path(@match), method: :patch, data: { confirm: "Czy na pewno chcesz zakończyć typowanie?" } %>
+    <% else %>
+      <p class="text-danger">Typowanie zakończone</p>      
+    <% end %>
+  <% end %>  
+  
+  <div class="my-4">
     <h4>Typy:</h4>
     <%= render 'shared/types' %>
   </div>
   
-  <% if @match.isActive == true %>
+  <% if @match.isActive %>
     <div class="my-3">
       <%= render 'matches/form' %>
     </div>

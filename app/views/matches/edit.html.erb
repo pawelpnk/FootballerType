@@ -1,29 +1,29 @@
 <div class="text-light d-flex flex-column align-items-center">
   <h1>Edytuj aktualny mecz</h1>
 
-  <%= form_with model: @Match, method: :patch do |form| %>
+  <%= form_with model: @match, method: :patch do |form| %>
 
     <div class="d-flex justify-content-center">
-      <%= form.label @match.first_team_name %>  : <%= form.label @match.second_team_name %><br>
+      <%= form.label @match.first_team_name, class: 'mx-1' %> : <%= form.label @match.second_team_name, class: 'mx-1' %><br>
     </div>
 
     <div>
-      <%= form.label :first_team_result %><br>
+      <%= form.label :Gole_gospodarza %><br>
       <%= form.text_field :first_team_result %>
     </div>
 
     <div>
-      <%= form.label :second_team_result %><br>
+      <%= form.label :Gole_gościa %><br>
       <%= form.text_field :second_team_result %>
     </div>
 
     <div>
-      <%= form.label :minutes %><br>
+      <%= form.label :Minuta %><br>
       <%= form.text_field :minutes %>
     </div>
 
     <div>
-      <%= form.label :player %><br>
+      <%= form.label :Gracz %><br>
       <%= form.text_field :player %>
     </div>
 

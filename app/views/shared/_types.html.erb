@@ -1,7 +1,29 @@
 <% @match.page.each do |m| %>
     <div class="card bg-dark mb-2" style="width: 18rem;">
     <div class="card-body">
-        <small class="card-title text-muted"><%= m.first_team.to_i %> : <%= m.second_team.to_i %>, Gracz: <%= m.player %>, Minuta: <%= m.minutes.to_i %></small>
+        <small class="card-title text-muted">
+            <% if @match.show_result && (@match.first_team_result.to_i == m.first_team.to_i) %>
+                <span class="text-warning"><%= m.first_team.to_i %></span>
+            <% else %>
+                <%= m.first_team.to_i %>
+            <% end %>
+            : 
+            <% if @match.show_result && (@match.second_team_result.to_i == m.second_team.to_i) %>
+                <span class="text-warning"><%= m.second_team.to_i %></span>,
+            <% else %>
+                <%= m.second_team.to_i %>,
+            <% end %>
+            <% if @match.show_result && (@match.player.to_s == m.player.to_s) %>
+                <span class="text-warning">Gracz: <%= m.player %></span>,
+            <% else %>
+                Gracz: <%= m.player %>,
+            <% end %>
+            <% if @match.show_result && (@match.minutes.to_i == m.minutes.to_i) %>
+                <span class="text-warning">Minuta: <%= m.minutes.to_i %></span>
+            <% else %>
+                Minuta: <%= m.minutes.to_i %>
+            <% end %>
+        </small>
         <p class="card-text"><%= m.comment %></p>
         <small class="text-muted"><%= m.user.name %></small>
     </div>
