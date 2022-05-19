@@ -1,24 +1,24 @@
-# README
+# Footballertype
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Aplikacja napisana w Ruby on Rails.
 
-Things you may want to cover:
+## Podstawowe informacje
 
-* Ruby version
+Aplikacja została stworzona na potrzeby nauki wyżej wymienionej technologii. Służy do typowania wybranych meczów. Aplikacja oferuje takie funkcjonalności jak:
+- Możliwość zakładania kont oraz logowania
+- Podział na role
+- Zakładanie nowych meczów przez administratora
+- Możliwość jednokrotnego wysłania postu z typem
+- Brak możliwości typowania po zamknięciu
+- Automatyczne podliczenie trafnych typów
+- Zbieranie punktów i rywalizacja o najlepszego typera
+- Przeglądnięcie dawnych meczów w archiwum
 
-* System dependencies
+## Instalacja
+Lokalna instalacja jest możliwa poprzez pobranie aplikacji, a następnie uruchomienie jej za pomocą `rails s`.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Użyte technologie
+- Ruby
+- Ruby on Rails
+- SQLite
+- Devise

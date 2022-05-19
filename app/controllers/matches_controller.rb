@@ -9,7 +9,9 @@ class MatchesController < ApplicationController
     end
 
     def index
-      @matches = Match.all
+      @number_all_matches = Match.all
+      @number_archiwum_maches = @number_all_matches.length() - 1
+      @matches = Match.all.take(@number_archiwum_maches)
     end
 
     def create
