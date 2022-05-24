@@ -22,3 +22,4 @@ Lokalna instalacja jest możliwa poprzez pobranie aplikacji, a następnie urucho
 - Ruby on Rails
 - SQLite
 - Devise
+- Bootstrap 4
